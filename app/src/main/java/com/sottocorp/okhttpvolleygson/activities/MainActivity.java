@@ -41,15 +41,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     {
         if (view == mJSONObjectSample)
         {
-            startActivity(new Intent(this, JSONObjectActivity.class));
+            startActivity(new Intent(this, WikiObjectActivity.class));
         }
         else if (view == mJSONArraySample)
         {
-            startActivity(new Intent(this, JSONArrayActivity.class));
+            startActivity(new Intent(this, GeocodeObjectActivity.class));
         }
         else if (view == mNetworkImageViewSample)
         {
-            startActivity(new Intent(this, NetworkImageViewActivity.class));
+            startActivity(new Intent(this, RouteObjectActivity.class));
         }
         else if (view == mImageRequestSample)
         {

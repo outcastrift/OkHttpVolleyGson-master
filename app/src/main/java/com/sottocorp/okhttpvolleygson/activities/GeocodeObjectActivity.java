@@ -21,7 +21,7 @@ import java.util.ArrayList;
 /**
  * Demonstrates how to make a JSON Object request
  */
-public class JSONArrayActivity extends AppCompatActivity
+public class GeocodeObjectActivity extends AppCompatActivity
 {
     private static final String sTag = "tagTwo";
 
@@ -98,7 +98,7 @@ public class JSONArrayActivity extends AppCompatActivity
                                 new Response.ErrorListener() {
                                     @Override
                                     public void onErrorResponse(VolleyError error) {
-                                        Log.e(JSONArrayActivity.class.getName(), error.toString());
+                                        Log.e(GeocodeObjectActivity.class.getName(), error.toString());
                                         mProgressBar.setVisibility(View.GONE);
                                         mErrorView.setVisibility(View.VISIBLE);
                                     }

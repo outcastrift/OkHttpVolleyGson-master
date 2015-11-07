@@ -23,6 +23,7 @@ android {
             applicationId 'com.sottocorp.okhttpvolleygson'
             buildConfigField 'String', 'wikiDomainName', '"http://en.wikipedia.org/w/api.php?"'
             buildConfigField 'String', 'geocodeDomainName', '"http://maps.google.com/maps/api"'
+            buildConfigField   'String', 'directionsDomainName', '"http://maps.googleapis.com/maps/api/directions"'
 
         }
     }

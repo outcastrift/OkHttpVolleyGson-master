@@ -18,7 +18,7 @@ import com.sottocorp.okhttpvolleygson.network.GsonGetRequest;
 /**
  * Demonstrates how to make a JSON Object request
  */
-public class JSONObjectActivity extends AppCompatActivity
+public class WikiObjectActivity extends AppCompatActivity
 {
     private static final String sTag = "tagOne";
 
