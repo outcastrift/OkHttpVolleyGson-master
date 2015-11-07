@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal"
-            android:text="@string/yoda_sentence"
+            android:text="Hard, this was"
             android:textColor="@color/primary"/>
 
         <ImageView
@@ -48,21 +48,21 @@
                 style="@style/Widget.AppCompat.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/json_object"/>
+                android:text="Wikipedia Search"/>
 
             <Button
                 android:id="@+id/json_array"
                 style="@style/Widget.AppCompat.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/json_array"/>
+                android:text="Geocode"/>
 
             <Button
                 android:id="@+id/network_image_view"
                 style="@style/Widget.AppCompat.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/network_image_view"/>
+                android:text="Routing"/>
 
             <Button
                 android:id="@+id/image_request"

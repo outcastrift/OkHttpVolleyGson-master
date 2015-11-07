@@ -6,16 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-
+import android.widget.*;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.sottocorp.okhttpvolleygson.R;
 import com.sottocorp.okhttpvolleygson.base.App;
-import com.sottocorp.okhttpvolleygson.dataModel.DummyObject;
-import com.sottocorp.okhttpvolleygson.network.ApiRequests;
+import com.sottocorp.okhttpvolleygson.dataModel.WikipediaObject;
+import com.sottocorp.okhttpvolleygson.network.WikipediaRequests;
 import com.sottocorp.okhttpvolleygson.network.GsonGetRequest;
 
 /**
@@ -28,7 +25,8 @@ public class JSONObjectActivity extends AppCompatActivity
     private TextView mTitle, mBody;
     private ProgressBar mProgressBar;
     private LinearLayout mContent, mErrorView;
-
+    private Button mButton;
+    private EditText mSearch;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -42,39 +40,67 @@ public class JSONObjectActivity extends AppCompatActivity
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
+        mButton=(Button)findViewById(R.id.search_button);
+        mSearch=(EditText)findViewById(R.id.search_box);
+        View.OnClickListener clickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               validateAndPerformSearch();
+            }
+        };
+
+        mButton.setOnClickListener(clickListener);
+
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         mTitle = (TextView) findViewById(R.id.my_title);
         mBody = (TextView) findViewById(R.id.my_body);
         mBody.setMovementMethod(new ScrollingMovementMethod());
         mErrorView = (LinearLayout) findViewById(R.id.error_view);
         mContent = (LinearLayout) findViewById(R.id.content);
+        mProgressBar.setVisibility(View.GONE);
+        mContent.setVisibility(View.VISIBLE);
 
-        final GsonGetRequest<DummyObject> gsonGetRequest =
-                ApiRequests.getDummyObject
-                        (
-                                new Response.Listener<DummyObject>() {
-                                    @Override
-                                    public void onResponse(DummyObject dummyObject) {
-                                        // Deal with the DummyObject here
-                                        mProgressBar.setVisibility(View.GONE);
-                                        mContent.setVisibility(View.VISIBLE);
-                                        setData(dummyObject);
-                                    }
-                                }
-                                ,
-                                new Response.ErrorListener() {
-                                    @Override
-                                    public void onErrorResponse(VolleyError error) {
-                                        // Deal with the error here
-                                        mProgressBar.setVisibility(View.GONE);
-                                        mErrorView.setVisibility(View.VISIBLE);
-                                    }
-                                }
-                        );
 
-        App.addRequest(gsonGetRequest, sTag);
+
     }
+    void validateAndPerformSearch(){
+        String searchCriteria = null;
+        searchCriteria=mSearch.getText().toString();
+        if(searchCriteria.equalsIgnoreCase("")||searchCriteria==null){
+            //do nothing
+        }else{
+            mProgressBar.setVisibility(View.VISIBLE);
+            mContent.setVisibility(View.GONE);
 
+            final GsonGetRequest<WikipediaObject> gsonGetRequest =
+                    WikipediaRequests.getWikipediaObject
+                            (
+                                    new Response.Listener<WikipediaObject>() {
+                                        @Override
+                                        public void onResponse(WikipediaObject dummyObject) {
+                                            // Deal with the WikipediaObject here
+                                            mProgressBar.setVisibility(View.GONE);
+                                            mContent.setVisibility(View.VISIBLE);
+                                            setData(dummyObject);
+                                        }
+                                    }
+                                    ,
+                                    new Response.ErrorListener() {
+                                        @Override
+                                        public void onErrorResponse(VolleyError error) {
+                                            // Deal with the error here
+                                            mProgressBar.setVisibility(View.GONE);
+                                            mErrorView.setVisibility(View.VISIBLE);
+                                        }
+                                    },
+                                    searchCriteria
+                            );
+
+
+            App.addRequest(gsonGetRequest, sTag);
+        }
+
+    }
     @Override
     protected void onStop()
     {
@@ -86,11 +112,11 @@ public class JSONObjectActivity extends AppCompatActivity
     /**
      * Sets the data in the UI
      *
-     * @param dummyObject is the object to get the data from
+     * @param wikipediaObject is the object to get the data from
      */
-    private void setData(@NonNull final DummyObject dummyObject)
+    private void setData(@NonNull final WikipediaObject wikipediaObject)
     {
-        mTitle.setText(dummyObject.getTitle());
-        mBody.setText(dummyObject.getBody());
+        mTitle.setText(wikipediaObject.getTitle());
+        mBody.setText(wikipediaObject.getBody());
     }
 }

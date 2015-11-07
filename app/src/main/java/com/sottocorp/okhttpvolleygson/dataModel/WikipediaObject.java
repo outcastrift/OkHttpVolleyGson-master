@@ -3,7 +3,7 @@ package com.sottocorp.okhttpvolleygson.dataModel;
 /**
  * Represents a dummy object
  */
-public class DummyObject
+public class WikipediaObject
 {
     private String mTitle;
     private String mBody;

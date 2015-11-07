@@ -21,7 +21,9 @@ android {
     productFlavors {
         live {
             applicationId 'com.sottocorp.okhttpvolleygson'
-            buildConfigField 'String', 'apiDomainName', '"http://www.mocky.io"'
+            buildConfigField 'String', 'wikiDomainName', '"http://en.wikipedia.org/w/api.php?"'
+            buildConfigField 'String', 'geocodeDomainName', '"http://maps.google.com/maps/api"'
+
         }
     }
 }

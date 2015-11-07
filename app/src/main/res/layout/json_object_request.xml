@@ -24,7 +24,19 @@
         android:orientation="vertical"
         android:visibility="gone"
         tools:visibility="visible">
+        <EditText
+                android:id="@+id/search_box"
+                style="@style/TextAppearance.AppCompat.Headline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:hint="Enter search parameters"/>
+        <Button android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/search_button"
 
+                android:text="Find It"/>
         <TextView
             android:id="@+id/my_title"
             style="@style/TextAppearance.AppCompat.Headline"

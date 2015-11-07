@@ -1,7 +1,6 @@
 package com.sottocorp.okhttpvolleygson.network;
 
 import android.support.annotation.NonNull;
-
 import com.android.volley.Response;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -9,18 +8,18 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.sottocorp.okhttpvolleygson.BuildConfig;
-import com.sottocorp.okhttpvolleygson.dataModel.DummyObject;
-import com.sottocorp.okhttpvolleygson.dataModel.DummyObjectDeserializer;
+import com.sottocorp.okhttpvolleygson.dataModel.WikipediaObject;
+import com.sottocorp.okhttpvolleygson.dataModel.WikipediaObjectDeserializer;
 
 import java.util.ArrayList;
 
 /**
  * Api requests
  */
-public class ApiRequests
+public class WikipediaRequests
 {
     private static final Gson gson = new GsonBuilder()
-            .registerTypeAdapter(DummyObject.class, new DummyObjectDeserializer())
+            .registerTypeAdapter(WikipediaObject.class, new WikipediaObjectDeserializer())
             .create();
     /**
      * Returns a dummy object
@@ -30,18 +29,19 @@ public class ApiRequests
      *
      * @return {@link GsonGetRequest}
      */
-    public static GsonGetRequest<DummyObject> getDummyObject
+    public static GsonGetRequest<WikipediaObject> getWikipediaObject
     (
-            @NonNull final Response.Listener<DummyObject> listener,
-            @NonNull final Response.ErrorListener errorListener
+            @NonNull final Response.Listener<WikipediaObject> listener,
+            @NonNull final Response.ErrorListener errorListener,
+            String searchCriterias
     )
     {
-        final String url = BuildConfig.apiDomainName + "/v2/55973508b0e9e4a71a02f05f";
+        final String url = BuildConfig.wikiDomainName + "format=json&action=query&prop=extracts&exintro=&formatversion=2&explaintext=&titles="+searchCriterias;
 
         return new GsonGetRequest<>
                 (
                         url,
-                        new TypeToken<DummyObject>() {}.getType(),
+                        new TypeToken<WikipediaObject>() {}.getType(),
                         gson,
                         listener,
                         errorListener
@@ -56,18 +56,19 @@ public class ApiRequests
      *
      * @return {@link GsonGetRequest}
      */
-    public static GsonGetRequest<ArrayList<DummyObject>> getDummyObjectArray
+    public static GsonGetRequest<ArrayList<WikipediaObject>> getWikipediaObjectArray
     (
-            @NonNull final Response.Listener<ArrayList<DummyObject>> listener,
-            @NonNull final Response.ErrorListener errorListener
+            @NonNull final Response.Listener<ArrayList<WikipediaObject>> listener,
+            @NonNull final Response.ErrorListener errorListener,
+            String searchCriteria
     )
     {
-        final String url = BuildConfig.apiDomainName + "/v2/5597d86a6344715505576725";
+        final String url = BuildConfig.wikiDomainName + searchCriteria;
 
         return new GsonGetRequest<>
                 (
                         url,
-                        new TypeToken<ArrayList<DummyObject>>() {}.getType(),
+                        new TypeToken<ArrayList<WikipediaObject>>() {}.getType(),
                         gson,
                         listener,
                         errorListener
@@ -76,7 +77,7 @@ public class ApiRequests
 
 
     /**
-     * An example call (not used in this app example) to demonstrate how to do a Volley POST call
+     * An example call to demonstrate how to do a Volley POST call
      * and parse the response with Gson.
      *
      * @param listener is the listener for the success response
@@ -86,11 +87,11 @@ public class ApiRequests
      */
     public static GsonPostRequest getDummyObjectArrayWithPost
     (
-            @NonNull final Response.Listener<DummyObject> listener,
+            @NonNull final Response.Listener<WikipediaObject> listener,
             @NonNull final Response.ErrorListener errorListener
     )
     {
-        final String url = BuildConfig.apiDomainName + "/dummyPath";
+        final String url = BuildConfig.wikiDomainName + "/dummyPath";
 
         final JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("name", "Ficus");
@@ -110,7 +111,7 @@ public class ApiRequests
                 (
                         url,
                         jsonObject.toString(),
-                        new TypeToken<DummyObject>() {}.getType(),
+                        new TypeToken<WikipediaObject>() {}.getType(),
                         gson,
                         listener,
                         errorListener

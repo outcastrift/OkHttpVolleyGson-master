@@ -17,7 +17,7 @@ import java.lang.reflect.Type;
  * Makes a get request and converts the response from JsonElement into a
  * list of objects/object using with Google Gson.
  */
-public class GsonGetRequest<T> extends Request<T>
+public class        GsonGetRequest<T> extends Request<T>
 {
     private final Gson gson;
     private final Type type;
