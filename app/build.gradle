@@ -6,7 +6,7 @@ android {
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
-        applicationId "com.sottocorp.okhttpvolleygson"
+        applicationId "com.atakmap.app.rest"
         minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
@@ -20,7 +20,7 @@ android {
 
     productFlavors {
         live {
-            applicationId 'com.sottocorp.okhttpvolleygson'
+            applicationId 'com.atakmap.app.rest'
             buildConfigField 'String', 'wikiDomainName', '"http://en.wikipedia.org/w/api.php?"'
             buildConfigField 'String', 'geocodeDomainName', '"http://maps.google.com/maps/api"'
             buildConfigField   'String', 'directionsDomainName', '"http://maps.googleapis.com/maps/api/directions"'

@@ -2,12 +2,12 @@
 
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sottocorp.okhttpvolleygson" >
+    package="com.atakmap.app.rest" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="com.sottocorp.okhttpvolleygson.base.App"
+        android:name="com.atakmap.app.rest.base.App"
         android:allowBackup="true"
         android:fullBackupContent="false"
         android:icon="@mipmap/ic_launcher"
@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme" >
 
         <activity
-            android:name="com.sottocorp.okhttpvolleygson.activities.MainActivity"
+            android:name="com.atakmap.app.rest.activities.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,26 +27,26 @@
         <activity
             android:name=".activities.WikiObjectActivity"
             android:label="@string/activity_title_JSON_object"
-            android:parentActivityName="com.sottocorp.okhttpvolleygson.activities.MainActivity"/>
+            android:parentActivityName="com.atakmap.app.rest.activities.MainActivity"/>
 
         <activity
             android:name=".activities.GeocodeObjectActivity"
             android:label="@string/activity_title_JSON_array"
-            android:parentActivityName="com.sottocorp.okhttpvolleygson.activities.MainActivity"/>
+            android:parentActivityName="com.atakmap.app.rest.activities.MainActivity"/>
 
         <activity
-            android:name="com.sottocorp.okhttpvolleygson.activities.NetworkImageViewActivity"
+            android:name="com.atakmap.app.rest.activities.NetworkImageViewActivity"
             android:label="@string/activity_title_network_image_view"
-            android:parentActivityName="com.sottocorp.okhttpvolleygson.activities.MainActivity"/>
+            android:parentActivityName="com.atakmap.app.rest.activities.MainActivity"/>
 
         <activity
-            android:name="com.sottocorp.okhttpvolleygson.activities.ImageRequestActivity"
+            android:name="com.atakmap.app.rest.activities.ImageRequestActivity"
             android:label="@string/activity_title_image_request"
-            android:parentActivityName="com.sottocorp.okhttpvolleygson.activities.MainActivity"/>
+            android:parentActivityName="com.atakmap.app.rest.activities.MainActivity"/>
         <activity
-                android:name="com.sottocorp.okhttpvolleygson.activities.RouteObjectActivity"
+                android:name="com.atakmap.app.rest.activities.RouteObjectActivity"
                 android:label="@string/activity_title_image_request"
-                android:parentActivityName="com.sottocorp.okhttpvolleygson.activities.MainActivity"/>
+                android:parentActivityName="com.atakmap.app.rest.activities.MainActivity"/>
 
     </application>
 
