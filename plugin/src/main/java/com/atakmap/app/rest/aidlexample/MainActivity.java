@@ -9,7 +9,7 @@ import android.os.RemoteException;
 import com.atakmap.app.rest.aidlexample.IMainService;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
-import com.atakmap.app.rest.aidlexample.R;
+import com.atakmap.rest.plugin.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
         Intent serviceIntent = new Intent()
                 .setComponent(new ComponentName(
-                        "com.afollestad.com.atakmap.app.rest.aidlexamplereceiver",
-                        "com.afollestad.com.atakmap.app.rest.aidlexamplereceiver.MainService"));
+                        "com.atakmap.app.rest.aidlexamplereceiver",
+                        "com.atakmap.app.rest.aidlexamplereceiver.MainService"));
         mLog.setText("Starting service…\n");
         startService(serviceIntent);
         mLog.append("Binding service…\n");
