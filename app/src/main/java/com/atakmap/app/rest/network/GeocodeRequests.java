@@ -23,7 +23,7 @@ public class GeocodeRequests
             .registerTypeAdapter(GeocodeObject.class, new GeocodeObjectDeserializer())
             .create();
     /**
-     * Returns a dummy object
+     * Returns a geocode object
      *
      * @param listener is the listener for the correct answer
      * @param errorListener is the listener for the error response
@@ -34,10 +34,12 @@ public class GeocodeRequests
     (
             @NonNull final Response.Listener<GeocodeObject> listener,
             @NonNull final Response.ErrorListener errorListener,
-            String searchCriterias
+            String searchCriterias,
+            String requestURL,
+            String geocode
     )
     {
-        final String url = BuildConfig.geocodeDomainName + "/geocode/json?address="+searchCriterias;
+        final String url = requestURL+searchCriterias+geocode;
 
         return new GsonGetRequest<>
                 (
@@ -50,7 +52,7 @@ public class GeocodeRequests
     }
 
     /**
-     * Returns a dummy object's array
+     * Returns a geocode object's array
      *
      * @param listener is the listener for the correct answer
      * @param errorListener is the listener for the error response
@@ -61,10 +63,11 @@ public class GeocodeRequests
     (
             @NonNull final Response.Listener<ArrayList<GeocodeObject>> listener,
             @NonNull final Response.ErrorListener errorListener,
-            String searchCriteria
+            String searchCriteria,
+            String requestURL
     )
     {
-        final String url = BuildConfig.geocodeDomainName + "/geocode/json?address="+searchCriteria;
+        final String url = requestURL+searchCriteria;
 
         return new GsonGetRequest<>
                 (

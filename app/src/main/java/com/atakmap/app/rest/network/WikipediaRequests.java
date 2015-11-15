@@ -33,11 +33,13 @@ public class WikipediaRequests
     (
             @NonNull final Response.Listener<WikipediaObject> listener,
             @NonNull final Response.ErrorListener errorListener,
-            String searchCriterias
+            String requestURL,
+            String searchCriterias,
+            String wikiSearch
     )
     {
-        final String url = BuildConfig.wikiDomainName + "format=json&action=query&prop=extracts&exintro=&formatversion=2&explaintext=&titles="+searchCriterias;
-
+        //final String url = BuildConfig.wikiDomainName + "format=json&action=query&prop=extracts&exintro=&formatversion=2&explaintext=&titles="+searchCriterias;
+        final String url = requestURL+ searchCriterias+ wikiSearch;
         return new GsonGetRequest<>
                 (
                         url,

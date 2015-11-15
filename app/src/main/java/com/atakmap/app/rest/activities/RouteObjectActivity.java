@@ -53,7 +53,7 @@ public class RouteObjectActivity extends AppCompatActivity
         View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               validateAndPerformSearch();
+               //validateAndPerformSearch();
             }
         };
         mDest = (EditText)findViewById(R.id.dest_search_box);
@@ -71,7 +71,7 @@ public class RouteObjectActivity extends AppCompatActivity
 
 
     }
-    void validateAndPerformSearch(){
+ /*   void validateAndPerformSearch(){
         String orgin = null;
         String dest = null;
         dest=mDest.getText().toString();
@@ -124,11 +124,11 @@ public class RouteObjectActivity extends AppCompatActivity
         super.onStop();
     }
 
-    /**
+    *//**
      * Sets the data in the UI
      *
      * @param routeObject is the object to get the data from
-     */
+     *//*
     private void setData(@NonNull final RouteObject routeObject)
     {
         directionList = new StringBuilder();
@@ -151,11 +151,11 @@ public class RouteObjectActivity extends AppCompatActivity
 
         mBody.setText(directionList.toString());
     }
-    /**
+    *//**
      * Sets the turns into a Hashmap we can manipulate
      *
      * @param routeObject is the object to get the data from
-     */
+     *//*
     private HashMap<Integer,Step> constructRouteFromJson( JsonArray routeObject)
     {
         HashMap<Integer,Step> map = new HashMap<Integer, Step>();
@@ -194,6 +194,6 @@ public class RouteObjectActivity extends AppCompatActivity
 
         }
     }
-
+*/
 
 }

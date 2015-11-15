@@ -35,10 +35,13 @@ public class RouteRequests
             @NonNull final Response.Listener<RouteObject> listener,
             @NonNull final Response.ErrorListener errorListener,
             String origin,
-            String destination
+            String destination,
+            String urlForRequest,
+            String queryParams
     )
     {
-        final String url = BuildConfig.directionsDomainName + "/json?origin="+origin+"&destination="+destination;
+        final String url =urlForRequest+queryParams+origin+destination;
+        // final String url = BuildConfig.directionsDomainName + "/json?origin="+origin+"&destination="+destination;
 
         return new GsonGetRequest<>
                 (

@@ -1,0 +1,45 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                tools:context=".MainActivity">
+
+    <EditText android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:hint="Input Request Type"
+              android:textSize="15sp"
+              android:id="@+id/intType"/>
+    <EditText android:layout_width="wrap_content"
+              android:layout_height="wrap_content" android:id="@+id/requestURL"
+              android:hint="RequestURL"
+              android:textSize="15sp">
+    </EditText>
+    <EditText android:id="@+id/queryParams" android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textSize="15sp"
+              android:hint="QueryParams"
+    ></EditText>
+    <EditText android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:id="@+id/geocode"
+              android:hint="Geocode"
+              android:textSize="15sp">
+    </EditText>
+    <Button android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonCalc"
+            android:text="=">
+    </Button>
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="result"
+              android:textSize="36sp"
+              android:id="@+id/result">
+    </TextView>
+
+</LinearLayout>

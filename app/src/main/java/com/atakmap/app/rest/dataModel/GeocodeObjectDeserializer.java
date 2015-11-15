@@ -44,7 +44,7 @@ public class GeocodeObjectDeserializer implements JsonDeserializer<GeocodeObject
                 jsonObject.getAsJsonObject("geometry").getAsJsonObject("bounds").getAsJsonObject("southwest").get("lng").getAsString();
 
         String locationType = jsonObject.getAsJsonObject("geometry").get("location_type").getAsString();
-String longName=jsonObject.getAsJsonArray("address_components").get(0).getAsJsonObject().get("long_name").getAsString();
+        String longName=jsonObject.getAsJsonArray("address_components").get(0).getAsJsonObject().get("long_name").getAsString();
         String shortName=jsonObject.getAsJsonArray("address_components").get(0).getAsJsonObject().get("short_name").getAsString();
                 String country=jsonObject.getAsJsonArray("address_components").get(1).getAsJsonObject().get("long_name").getAsString();
 

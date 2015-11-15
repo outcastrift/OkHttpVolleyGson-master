@@ -45,7 +45,7 @@ public class WikiObjectActivity extends AppCompatActivity
         View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               validateAndPerformSearch();
+               //validateAndPerformSearch();
             }
         };
 
@@ -63,7 +63,7 @@ public class WikiObjectActivity extends AppCompatActivity
 
 
     }
-    void validateAndPerformSearch(){
+/*    void validateAndPerformSearch(){
         String searchCriteria = null;
         searchCriteria=mSearch.getText().toString();
         if(searchCriteria.equalsIgnoreCase("")||searchCriteria==null){
@@ -109,14 +109,14 @@ public class WikiObjectActivity extends AppCompatActivity
         super.onStop();
     }
 
-    /**
+    *//**
      * Sets the data in the UI
      *
      * @param wikipediaObject is the object to get the data from
-     */
+     *//*
     private void setData(@NonNull final WikipediaObject wikipediaObject)
     {
         mTitle.setText(wikipediaObject.getTitle());
         mBody.setText(wikipediaObject.getBody());
-    }
+    }*/
 }

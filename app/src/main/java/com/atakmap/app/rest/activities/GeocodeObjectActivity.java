@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import com.android.volley.Response;
@@ -58,7 +57,7 @@ public class GeocodeObjectActivity extends AppCompatActivity
         View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validateAndPerformSearch2();
+              //  validateAndPerformSearch();
             }
         };
         mButton.setOnClickListener(clickListener);
@@ -74,7 +73,7 @@ public class GeocodeObjectActivity extends AppCompatActivity
 
         super.onStop();
     }
-    void validateAndPerformSearch(){
+/*    *//*void validateAndPerformSearch(){
         String searchCriteria = null;
         searchCriteria=mSearch.getText().toString();
         if(searchCriteria.equalsIgnoreCase("")||searchCriteria==null){
@@ -109,8 +108,8 @@ public class GeocodeObjectActivity extends AppCompatActivity
 
         App.addRequest(gsonGetRequest, sTag);
         }
-    }
-    void validateAndPerformSearch2(){
+    }*//*
+    void validateAndPerformSearch(){
         String searchCriteria = null;
         searchCriteria=mSearch.getText().toString();
         if(searchCriteria.equalsIgnoreCase("")||searchCriteria==null){
@@ -155,16 +154,16 @@ public class GeocodeObjectActivity extends AppCompatActivity
         //mSecondTitle.setText(geocodeObjectArrayList.get(1).getTitle());
       //  mSecondBody.setText(geocodeObjectArrayList.get(1).getBody());
     }
-    /**
+    *//**
      * Sets the data in the UI
      *
      * @param geocodeObjectArrayList is the object's array to get the data from
-     */
+     *//*
     private void setData(@NonNull final ArrayList<GeocodeObject> geocodeObjectArrayList)
     {
         mTitle.setText(geocodeObjectArrayList.get(0).getTitle());
         mBody.setText(geocodeObjectArrayList.get(0).getBody());
        // mSecondTitle.setText(geocodeObjectArrayList.get(1).getTitle());
        // mSecondBody.setText(geocodeObjectArrayList.get(1).getBody());
-    }
+    }*/
 }
