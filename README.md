@@ -1,6 +1,6 @@
-# REST Api client Library: OkHttp, Volley Gson, AIDL
+# Android REST-API: OkHttp, Volley and Gson
 
-REST Api client Library
+The beginning of a R.E.S.T. (Representational State Transfer) api.
 
 
 
