@@ -1,13 +1,13 @@
 package com.atakmap.app.rest.dataModel;
 
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import auto.parcelgson.AutoParcelGson;
 
 /**
  * Created by Sam on 07-Nov-15.
  */
-public class GeocodeObject implements Parcelable {
+@AutoParcelGson
+public abstract class GeocodeObject  {
     public String mTitle;
     public String mBody;
 
@@ -27,73 +27,27 @@ public class GeocodeObject implements Parcelable {
         mBody = body;
     }
 
-
-
-    public GeocodeObject(String title, String body) {
-        this.mTitle = title;
-        this.mBody = body;
-    }
-    public GeocodeObject(){
-
+    static GeocodeObject create(String mTitle, String mBody) {
+        return builder().title(mTitle).body(mBody).build();
     }
 
-   /* @Override
-    public int describeContents() {
-        return 0;
+    public abstract String title();
+    public abstract String body();
+
+    @AutoParcelGson.Builder
+    public abstract static class Builder {
+        public abstract Builder title(String s);
+        public abstract Builder body(String s);
+        public abstract GeocodeObject build();
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(mTitle);
-        dest.writeString(mBody);
-    }
-    public void readFromParcel(Parcel in){
-        this.mBody=in.readString();
-        this.mTitle=in.readString();
+
+
+    public static AutoParcelGson.Builder builder() {
+        return new AutoParcelGson_GeocodeObject.Builder();
     }
 
-    @SuppressWarnings("unused")
-    public static final Parcelable.Creator<GeocodeObject> CREATOR = new Parcelable.Creator<GeocodeObject>() {
+    public abstract Builder toBuilder();
 
-        @Override
-        public GeocodeObject createFromParcel(Parcel in) {
-            return new GeocodeObject(in.readString(),in.readString());
-        }
-
-        @Override
-        public GeocodeObject[] newArray(int size) {
-            return new GeocodeObject[size];
-        }
-    };*/
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.mTitle);
-        dest.writeString(this.mBody);
-    }
-
-    protected GeocodeObject(Parcel in) {
-        this.mTitle = in.readString();
-        this.mBody = in.readString();
-    }
-
-    public static final Parcelable.Creator<GeocodeObject> CREATOR = new Parcelable.Creator<GeocodeObject>() {
-        public GeocodeObject createFromParcel(Parcel source) {
-            return new GeocodeObject(source);
-        }
-
-        public GeocodeObject[] newArray(int size) {
-            return new GeocodeObject[size];
-        }
-    };
-    public void readFromParcel(Parcel in){
-        this.mBody=in.readString();
-        this.mTitle=in.readString();
-    }
 }
 
