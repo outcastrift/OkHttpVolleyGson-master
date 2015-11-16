@@ -1,4 +1,4 @@
-# Android Networking I: OkHttp, Volley and Gson
+# Android REST-API
 
 The beginning of a R.E.S.T. (Representational State Transfer) api.
 
