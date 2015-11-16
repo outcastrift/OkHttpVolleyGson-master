@@ -5,9 +5,8 @@ import android.support.annotation.NonNull;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.atakmap.app.rest.base.App;
-import com.atakmap.app.rest.dataModel.GeocodeObject;
-import com.atakmap.app.rest.dataModel.RouteObject;
-import com.atakmap.app.rest.dataModel.WikipediaObject;
+import com.atakmap.app.rest.dataModel.*;
+import com.atakmap.app.rest.dataModel.RestResponse;
 import com.atakmap.app.rest.network.GeocodeRequests;
 import com.atakmap.app.rest.network.GsonGetRequest;
 import com.atakmap.app.rest.network.RouteRequests;
@@ -15,13 +14,15 @@ import com.atakmap.app.rest.network.WikipediaRequests;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Sam on 15-Nov-15.
  */
 public class RestServiceImplementation extends IRestService.Stub {
-    private String routeResponse;
+    private String routeResponse = new String();
     private String wikiResponse;
     private String response;
     private static final String TAG = "RestServiceImplementation";
@@ -124,7 +125,13 @@ public class RestServiceImplementation extends IRestService.Stub {
                                                         String results =  setRouteData(routeObject);
                                                         try {
                                                             callback.returnResults(results);
-                                                        } catch (RemoteException e) {
+                                                        } catch (Exception e) {
+                                                            e.printStackTrace();
+                                                        }
+                                                        try {
+                                                            callback.restResponse(new RestResponse(routeObject.getTitle(),
+                                                                    stepNumber, stepDirections, startPoint, endPoint, distance, duration));
+                                                        } catch (Exception e) {
                                                             e.printStackTrace();
                                                         }
 
@@ -136,7 +143,7 @@ public class RestServiceImplementation extends IRestService.Stub {
                                                     public void onErrorResponse(VolleyError error) {
                                                         try {
                                                             callback.returnResults("Network or transmission error has occurred.");
-                                                        } catch (RemoteException e) {
+                                                        } catch (Exception e) {
                                                             e.printStackTrace();
                                                         }
                                                     }
@@ -151,7 +158,12 @@ public class RestServiceImplementation extends IRestService.Stub {
                         App.addRequest(gsonGetRequest, TAG);
 
     }
-
+    public List<String> stepNumber =new ArrayList<String>();
+    public List<String> stepDirections=new ArrayList<String>();
+    public List<String> startPoint=new ArrayList<String>();
+    public List<String> endPoint=new ArrayList<String>();
+    public List<String> distance=new ArrayList<String>();
+    public List<String> duration=new ArrayList<String>();
     /**
      * Sets the data in the UI
      *
@@ -165,6 +177,12 @@ public class RestServiceImplementation extends IRestService.Stub {
         directionList.append("\n \n Directions are as follows:" + "\n");
         HashMap<Integer, Step> map = constructRouteFromJson(routeObject.getDirections());
         for (int i = 0; i < map.size(); i++) {
+            stepNumber.add(String.valueOf(i+1));
+            stepDirections.add(map.get(i).instructions);
+            startPoint.add(map.get(i).startGeopoint);
+            endPoint.add(map.get(i).endGeopoint);
+            distance.add( map.get(i).distance);
+            duration.add(map.get(i).duration);
             directionList.append("\n Step " + String.valueOf(i + 1) + "\n");
             directionList
                     .append(" Start:" + map.get(i).startGeopoint)

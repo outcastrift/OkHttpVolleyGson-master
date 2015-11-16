@@ -17,8 +17,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.atakmap.app.rest.dataModel.RestResponse;
 import com.atakmap.app.rest.restAidl.IRestCallback;
 import com.atakmap.app.rest.restAidl.IRestService;
+
+import java.math.BigInteger;
 
 public class  MainActivity extends AppCompatActivity {
     private static final String TAG = "AIDLDemo";
@@ -29,13 +32,8 @@ public class  MainActivity extends AppCompatActivity {
     Button routeButton;
     Button wikiButton;
     Button geocodeButton;
-    EditText queryURLText ;
-    EditText geoSearchText ;
-    EditText queryParamsText ;
-    // EditText intType = (EditText) findViewById(R.id.intType);
-    EditText wikiSearchText  ;
-    EditText routeStartText ;
-    EditText routeEndText ;
+
+
 
     class RestServiceConnection implements ServiceConnection {
 
@@ -95,9 +93,9 @@ public class  MainActivity extends AppCompatActivity {
             EditText  geoSearchText = (EditText) findViewById(R.id.geocode);
             EditText queryParamsText = (EditText) findViewById(R.id.queryParams);
            // EditText intType = (EditText) findViewById(R.id.intType);
-            EditText wikiSearchText = (EditText) findViewById(R.id.requestURL);
-            EditText  routeStartText = (EditText) findViewById(R.id.requestURL);
-            EditText  routeEndText = (EditText) findViewById(R.id.requestURL);
+            EditText wikiSearchText = (EditText) findViewById(R.id.wikiSearch);
+            EditText  routeStartText = (EditText) findViewById(R.id.routeStart);
+            EditText  routeEndText = (EditText) findViewById(R.id.routeEnd);
 
 
             public void onClick(View v) {
@@ -113,9 +111,9 @@ public class  MainActivity extends AppCompatActivity {
                 if (!wikiSearchText.getText().toString().equalsIgnoreCase("")) {
                     setWikiSearch(wikiSearchText.getText().toString());
                 } if (!routeStartText.getText().toString().equalsIgnoreCase("")) {
-                    setGeoSearch(routeStartText.getText().toString());
+                    setRouteStart(routeStartText.getText().toString());
                 } if (!routeEndText.getText().toString().equalsIgnoreCase("")) {
-                    setGeoSearch(routeEndText.getText().toString());
+                    setRouteEnd(routeEndText.getText().toString());
                 }
                /* if(Integer.parseInt(intType.getText().toString())>0){
                     setRequestType(Integer.parseInt(intType.getText().toString()));
@@ -128,20 +126,30 @@ public class  MainActivity extends AppCompatActivity {
 
                 performQuery( getURL(), getQueryParams(), getGeoSearch(), getRouteStart(), getRouteEnd(), getWikiSearch());
                 setGeoSearch("");
+                geoSearchText.setText("");
                 setWikiSearch("");
+                wikiSearchText.setText("");
                 setQueryParams("");
+                queryParamsText.setText("");
                 setRouteEnd("");
+                routeEndText.setText("");
                 setRouteStart("");
+                routeStartText.setText("");
                 setURL("");
+                queryURLText.setText("");
 
-               }
+
+            }
         });
         routeButton.setOnClickListener(new View.OnClickListener() {
+            EditText queryURLText = (EditText)findViewById(R.id.requestURL);
+            EditText  routeStartText = (EditText) findViewById(R.id.routeStart);
+            EditText  routeEndText = (EditText) findViewById(R.id.routeEnd);
             @Override
             public void onClick(View v) {
-                String routeURL="http://maps.googleapis.com/maps/api/directions";
+                String routeURL="http://maps.googleapis.com/maps/api/directions/json?origin=";
                 queryURLText.setText(routeURL);
-                String routeStart="/json?origin=sherrill ny";
+                String routeStart="sherrill ny";
                 routeStartText.setText(routeStart);
                 String routeEnd="&destination=rome ny";
                 routeEndText.setText(routeEnd);
@@ -152,6 +160,10 @@ public class  MainActivity extends AppCompatActivity {
             }
         });
         geocodeButton.setOnClickListener(new View.OnClickListener() {
+            EditText queryURLText = (EditText)findViewById(R.id.requestURL);
+            EditText queryParamsText = (EditText) findViewById(R.id.queryParams);
+            EditText  geoSearchText = (EditText) findViewById(R.id.geocode);
+
             @Override
             public void onClick(View v) {
                 String geoUrl="http://maps.google.com/maps/api/geocode/json?";
@@ -166,6 +178,10 @@ public class  MainActivity extends AppCompatActivity {
             }
         });
         wikiButton.setOnClickListener(new View.OnClickListener() {
+            EditText queryURLText = (EditText)findViewById(R.id.requestURL);
+            EditText queryParamsText = (EditText) findViewById(R.id.queryParams);
+            EditText wikiSearchText = (EditText) findViewById(R.id.wikiSearch);
+
             @Override
             public void onClick(View v) {
                 String wikiURL="http://en.wikipedia.org/w/api.php?";
@@ -188,6 +204,9 @@ public class  MainActivity extends AppCompatActivity {
 
                 @Override
                 public void returnResults(final String result) throws RemoteException {
+                    BigInteger size = BigInteger.valueOf(result.toCharArray().length);
+                    BigInteger test = size;
+                  try{
                     TextView resultBox = (TextView)findViewById(R.id.result);
                     if (result != null){
                         resultBox.setText(result.toString());}
@@ -201,10 +220,22 @@ public class  MainActivity extends AppCompatActivity {
                                       }
                                   }
 
-                    );
+                    );}catch(Exception e){
+                      Log.d(TAG, e.toString());
+                  }
 
 
 
+                }
+
+                @Override
+                public void restResponse(RestResponse r) throws RemoteException {
+                    try {
+                        RestResponse restResponse = r;
+                        restResponse.getBody();
+                    }catch(Exception e ){
+                        Log.d(TAG, e.toString());
+                    }
                 }
             });
         } catch (RemoteException e) {
