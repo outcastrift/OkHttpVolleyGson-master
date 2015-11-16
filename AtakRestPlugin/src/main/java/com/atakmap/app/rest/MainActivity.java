@@ -7,10 +7,8 @@ import android.content.ServiceConnection;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,7 +17,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.atakmap.app.rest.dataModel.GeocodeObject;
 import com.atakmap.app.rest.restAidl.IRestCallback;
 import com.atakmap.app.rest.restAidl.IRestService;
 
@@ -32,6 +29,13 @@ public class  MainActivity extends AppCompatActivity {
     Button routeButton;
     Button wikiButton;
     Button geocodeButton;
+    EditText queryURLText ;
+    EditText geoSearchText ;
+    EditText queryParamsText ;
+    // EditText intType = (EditText) findViewById(R.id.intType);
+    EditText wikiSearchText  ;
+    EditText routeStartText ;
+    EditText routeEndText ;
 
     class RestServiceConnection implements ServiceConnection {
 
@@ -87,32 +91,31 @@ public class  MainActivity extends AppCompatActivity {
 
         buttonCalc.setOnClickListener(new View.OnClickListener() {
             TextView resultBox=(TextView) findViewById(R.id.result);
-            EditText queryURL = (EditText) findViewById(R.id.requestURL);
-            EditText geoSearch = (EditText) findViewById(R.id.geocode);
-            EditText queryParams = (EditText) findViewById(R.id.queryParams);
-            EditText intType = (EditText) findViewById(R.id.intType);
-            EditText wikiSearch = (EditText) findViewById(R.id.requestURL);
-            EditText routeStart = (EditText) findViewById(R.id.requestURL);
-            EditText routeEnd = (EditText) findViewById(R.id.requestURL);
+            EditText queryURLText = (EditText) findViewById(R.id.requestURL);
+            EditText  geoSearchText = (EditText) findViewById(R.id.geocode);
+            EditText queryParamsText = (EditText) findViewById(R.id.queryParams);
+           // EditText intType = (EditText) findViewById(R.id.intType);
+            EditText wikiSearchText = (EditText) findViewById(R.id.requestURL);
+            EditText  routeStartText = (EditText) findViewById(R.id.requestURL);
+            EditText  routeEndText = (EditText) findViewById(R.id.requestURL);
 
 
-            GeocodeObject finalGeo = new GeocodeObject();
             public void onClick(View v) {
-                if (!queryURL.getText().toString().equalsIgnoreCase("")) {
-                setURL(queryURL.getText().toString());
+                if (!queryURLText.getText().toString().equalsIgnoreCase("")) {
+                setURL(queryURLText.getText().toString());
                 }
-                if (!queryParams.getText().toString().equalsIgnoreCase("")) {
-                    setQueryParams(queryParams.getText().toString());
+                if (!queryParamsText.getText().toString().equalsIgnoreCase("")) {
+                    setQueryParams(queryParamsText.getText().toString());
                 }
-                if (!geoSearch.getText().toString().equalsIgnoreCase("")) {
-                    setGeoSearch(geoSearch.getText().toString());
+                if (!geoSearchText.getText().toString().equalsIgnoreCase("")) {
+                    setGeoSearch(geoSearchText.getText().toString());
                 }
-                if (!wikiSearch.getText().toString().equalsIgnoreCase("")) {
-                    setWikiSearch(wikiSearch.getText().toString());
-                } if (!routeStart.getText().toString().equalsIgnoreCase("")) {
-                    setGeoSearch(routeStart.getText().toString());
-                } if (!routeEnd.getText().toString().equalsIgnoreCase("")) {
-                    setGeoSearch(routeEnd.getText().toString());
+                if (!wikiSearchText.getText().toString().equalsIgnoreCase("")) {
+                    setWikiSearch(wikiSearchText.getText().toString());
+                } if (!routeStartText.getText().toString().equalsIgnoreCase("")) {
+                    setGeoSearch(routeStartText.getText().toString());
+                } if (!routeEndText.getText().toString().equalsIgnoreCase("")) {
+                    setGeoSearch(routeEndText.getText().toString());
                 }
                /* if(Integer.parseInt(intType.getText().toString())>0){
                     setRequestType(Integer.parseInt(intType.getText().toString()));
@@ -123,11 +126,10 @@ public class  MainActivity extends AppCompatActivity {
                // url = queryURL.getText().toString();
                // type =1;
 
-                performQuery(getRequestType(), getURL(), getQueryParams(), getGeoSearch(), getRouteStart(), getRouteEnd(), getWikiSearch());
+                performQuery( getURL(), getQueryParams(), getGeoSearch(), getRouteStart(), getRouteEnd(), getWikiSearch());
                 setGeoSearch("");
                 setWikiSearch("");
                 setQueryParams("");
-                setRequestType(0);
                 setRouteEnd("");
                 setRouteStart("");
                 setURL("");
@@ -138,11 +140,12 @@ public class  MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String routeURL="http://maps.googleapis.com/maps/api/directions";
-
+                queryURLText.setText(routeURL);
                 String routeStart="/json?origin=sherrill ny";
+                routeStartText.setText(routeStart);
                 String routeEnd="&destination=rome ny";
+                routeEndText.setText(routeEnd);
                 setURL(routeURL);
-                setRequestType(2);
                 setRouteStart(routeStart);
                 setRouteEnd(routeEnd);
 
@@ -152,10 +155,12 @@ public class  MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String geoUrl="http://maps.google.com/maps/api/geocode/json?";
+                queryURLText.setText(geoUrl);
                 String geoParams="address=";
+                queryParamsText.setText(geoParams);
                 String geoQuery="tn";
+                geoSearchText.setText(geoQuery);
                 setGeoSearch(geoQuery);
-                setRequestType(1);
                 setQueryParams(geoParams);
                 setURL(geoUrl);
             }
@@ -164,9 +169,11 @@ public class  MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String wikiURL="http://en.wikipedia.org/w/api.php?";
+                queryURLText.setText(wikiURL);
                 String wikiParams="format=json&action=query&prop=extracts&exintro=&formatversion=2&explaintext=&titles=";
+                queryParamsText.setText(wikiParams);
                 String wikiQuery="War";
-                setRequestType(3);
+                wikiSearchText.setText(wikiQuery);
                 setWikiSearch(wikiQuery);
                 setQueryParams(wikiParams);
                 setURL(wikiURL);
@@ -175,9 +182,9 @@ public class  MainActivity extends AppCompatActivity {
     }
 
 
-    void performQuery(int type, String url, String params, String geo, String rB, String rE, String wS){
+    void performQuery(String url, String params, String geo, String rB, String rE, String wS){
         try {
-            service.restRequest(type,url, params, geo,rB,rE,wS, new IRestCallback.Stub(){
+            service.restRequest(url, params, geo,rB,rE,wS, new IRestCallback.Stub(){
 
                 @Override
                 public void returnResults(final String result) throws RemoteException {
@@ -248,13 +255,9 @@ public class  MainActivity extends AppCompatActivity {
         releaseService();
     }
 
-    public int getRequestType() {
-        return requestType;
-    }
 
-    public void setRequestType(int requestType) {
-        this.requestType = requestType;
-    }
+
+
 
     public String getURL() {
         return URL;
@@ -304,7 +307,6 @@ public class  MainActivity extends AppCompatActivity {
         this.queryParams = queryParams;
     }
 
-    private int requestType;
     private String URL="";
     private String routeStart="";
     private String routeEnd="";

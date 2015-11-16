@@ -30,7 +30,7 @@ public class RestServiceImplementation extends IRestService.Stub {
     private IRestCallback callback;
 
     @Override
-    public void restRequest(int requestType, String url, String queryParams, String geo, String routeBegin, String routeEnd, String wikiSearch, IRestCallback callback) throws RemoteException {
+    public void restRequest(String url, String queryParams, String geo, String routeBegin, String routeEnd, String wikiSearch, IRestCallback callback) throws RemoteException {
         this.callback = callback;
         if (!geo.equalsIgnoreCase("")){
         validateAndPerformGeocode(url, queryParams, geo);

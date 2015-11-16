@@ -59,33 +59,5 @@ public class RestService extends Service {
 
 
 
-  /*  @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        log("Received start command.");
-        return START_STICKY;
-    }*/
-/*
-    @Override
-    public IBinder onBind(Intent intent) {
-        log("Received binding.");
-        return mBinder;
-    }
 
-    private final IRestService.Stub mBinder = new IRestService.Stub() {
-        @Override
-        public RestResponse[] listFiles(String path) throws RemoteException {
-            log("Received list command for: " + path);
-            List<RestResponse> toSend = new ArrayList<>();
-            // Generates a list of 1000 objects that aren't sent back to the binding Activity
-            for (int i = 0; i < 1000; i++)
-                toSend.add(new RestResponse("/example/item" + (i + 1)));
-            return toSend.toArray(new RestResponse[toSend.size()]);
-        }
-
-        @Override
-        public void exit() throws RemoteException {
-            log("Received exit command.");
-            stopSelf();
-        }
-    };*/
 }
