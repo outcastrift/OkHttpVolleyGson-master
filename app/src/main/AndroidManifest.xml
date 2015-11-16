@@ -52,6 +52,11 @@
                 android:exported="true"
                 android:label="@string/app_name"
                 tools:ignore="ExportedService" />
+        <service
+                android:name=".restAidl.RestServiceCallBack"
+                android:exported="true"
+                android:label="@string/app_name"
+                tools:ignore="ExportedService" />
 
     </application>
 

@@ -5,6 +5,7 @@ package com.atakmap.app.rest.dataModel;
  */
 
 import android.annotation.SuppressLint;
+import android.os.Parcel;
 import android.util.Log;
 import com.google.gson.*;
 
@@ -22,7 +23,7 @@ public class GeocodeObjectDeserializer implements JsonDeserializer<GeocodeObject
     public GeocodeObject deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
             throws JsonParseException
     {
-        GeocodeObject geocodeObject = new GeocodeObject();
+
         final JsonObject jsonObject = json.getAsJsonObject().getAsJsonArray("results").get(0).getAsJsonObject();
 
       //  Log.e("JSON OUTPUT = ", jsonObject.toString());
@@ -34,7 +35,7 @@ public class GeocodeObjectDeserializer implements JsonDeserializer<GeocodeObject
         //final JsonObject elementObject =jarray.get(0).getAsJsonObject();
         String title = jsonObject.get("formatted_address").getAsString();
         Log.d("GeocodeObjectDeserializer title =",title);
-        geocodeObject.setTitle(title);
+
        // Log.d("GeocodeObjectDeserializer title =",jsonObject.get("formatted_address").getAsString());
         String lat =jsonObject.getAsJsonObject("geometry").getAsJsonObject("location").get("lat").getAsString();
         String lng = jsonObject.getAsJsonObject("geometry").getAsJsonObject("location").get("lng").getAsString();
@@ -47,17 +48,17 @@ public class GeocodeObjectDeserializer implements JsonDeserializer<GeocodeObject
         String longName=jsonObject.getAsJsonArray("address_components").get(0).getAsJsonObject().get("long_name").getAsString();
         String shortName=jsonObject.getAsJsonArray("address_components").get(0).getAsJsonObject().get("short_name").getAsString();
                 String country=jsonObject.getAsJsonArray("address_components").get(1).getAsJsonObject().get("long_name").getAsString();
-
-
-        geocodeObject.setBody("Latitude = " + lat +"\n Longitude = "+ lng+
-                        "\n This location is " + locationType+
-        "\n Bounds are as follows : "+
+        String body ="Latitude = " + lat +"\n Longitude = "+ lng+
+                "\n This location is " + locationType+
+                "\n Bounds are as follows : "+
                 "\n NorthEast = "+boundsNE+
                 "\n SouthWest = "+boundsSW+
-               "\n Location details are as follows : "+
-        "\n Long Name = "+longName+
-        "\n Short Name = "+shortName+
-        "\n Country = "+country);
+                "\n Location details are as follows : "+
+                "\n Long Name = "+longName+
+                "\n Short Name = "+shortName+
+                "\n Country = "+country;
+        GeocodeObject geocodeObject =new GeocodeObject(title, body);
+
 
        /* for (int i = 0; i < jarray.size(); i++) {
              geocodeObject = new GeocodeObject();
