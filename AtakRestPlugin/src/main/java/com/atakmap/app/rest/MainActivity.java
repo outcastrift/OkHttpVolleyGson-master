@@ -275,11 +275,17 @@ public class  MainActivity extends AppCompatActivity {
         super.onDestroy();
         releaseService();
     }
+    /**
+     * Called when the activity is about to be resumed.
+     */
     @Override
     protected void onResume() {
         super.onResume();
         initService();
     }
+    /**
+     * Called when the activity is about to be paused.
+     */
     @Override
     protected void onPause() {
         super.onPause();

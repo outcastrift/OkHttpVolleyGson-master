@@ -1,12 +1,11 @@
 package com.atakmap.app.rest.dataModel;
 
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
+import com.google.gson.*;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Deserializer for a dummy object
@@ -22,8 +21,11 @@ public class WikipediaObjectDeserializer implements JsonDeserializer<WikipediaOb
         final WikipediaObject wikipediaObject = new WikipediaObject();
         final JsonObject jsonObject = (JsonObject) json.getAsJsonObject().getAsJsonObject("query").getAsJsonArray("pages").get(0);
         wikipediaObject.setTitle(jsonObject.get("title").getAsString());
-      //  wikipediaObject.setTitle(jsonObject.get("query").getAsString());
+        //  wikipediaObject.setTitle(jsonObject.get("query").getAsString());
         wikipediaObject.setBody(jsonObject.get("extract").getAsString());
+
+
+
 
         return wikipediaObject;
     }

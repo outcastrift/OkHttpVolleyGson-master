@@ -70,6 +70,12 @@ public class RestServiceImplementation extends IRestService.Stub {
                                             } catch (RemoteException e) {
                                                 e.printStackTrace();
                                             }
+                                            try {
+                                                callback.restResponse(new RestResponse(geocodeObject.getTitle(),
+                                                        geocodeObject.getBody()));
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            }
 
                                         }
                                     }
@@ -80,6 +86,12 @@ public class RestServiceImplementation extends IRestService.Stub {
                                             try {
                                                 callback.returnResults("Network or transmission error has occurred.");
                                             } catch (RemoteException e) {
+                                                e.printStackTrace();
+                                            }
+                                            try {
+                                                callback.restResponse(new RestResponse("Network or transmission error has occurred.",
+                                                        "Empty"));
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         }
@@ -146,6 +158,12 @@ public class RestServiceImplementation extends IRestService.Stub {
                                                         } catch (Exception e) {
                                                             e.printStackTrace();
                                                         }
+                                                        try {
+                                                            callback.restResponse(new RestResponse("Network or transmission error has occurred.",
+                                                                    "Empty"));
+                                                        } catch (Exception e) {
+                                                            e.printStackTrace();
+                                                        }
                                                     }
                                                 },
                                                 orgin,
@@ -178,11 +196,11 @@ public class RestServiceImplementation extends IRestService.Stub {
         HashMap<Integer, Step> map = constructRouteFromJson(routeObject.getDirections());
         for (int i = 0; i < map.size(); i++) {
             stepNumber.add(String.valueOf(i+1));
-            stepDirections.add(map.get(i).instructions);
-            startPoint.add(map.get(i).startGeopoint);
-            endPoint.add(map.get(i).endGeopoint);
-            distance.add( map.get(i).distance);
-            duration.add(map.get(i).duration);
+            stepDirections.add(i,map.get(i).instructions);
+            startPoint.add(i,map.get(i).startGeopoint);
+            endPoint.add(i,map.get(i).endGeopoint);
+            distance.add(i, map.get(i).distance);
+            duration.add(i, map.get(i).duration);
             directionList.append("\n Step " + String.valueOf(i + 1) + "\n");
             directionList
                     .append(" Start:" + map.get(i).startGeopoint)
@@ -266,6 +284,12 @@ public class RestServiceImplementation extends IRestService.Stub {
                                                     } catch (RemoteException e) {
                                                         e.printStackTrace();
                                                     }
+                                                    try {
+                                                        callback.restResponse(new RestResponse(wikipediaObject.getTitle(),
+                                                                wikipediaObject.getBody()));
+                                                    } catch (Exception e) {
+                                                        e.printStackTrace();
+                                                    }
                                                 }
                                             }
                                             ,
@@ -276,6 +300,12 @@ public class RestServiceImplementation extends IRestService.Stub {
                                                     try {
                                                         callback.returnResults("Network or transmission error has occurred.");
                                                     } catch (RemoteException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                    try {
+                                                        callback.restResponse(new RestResponse("Network or transmission error has occurred.",
+                                                                "Empty"));
+                                                    } catch (Exception e) {
                                                         e.printStackTrace();
                                                     }
                                                 }

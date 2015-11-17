@@ -23,8 +23,11 @@ android {
         live {
             applicationId 'com.atakmap.app.rest'
             buildConfigField 'String', 'wikiDomainName', '"http://en.wikipedia.org/w/api.php?"'
+            //https://en.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&list=geosearch&gsradius=10000&gscoord=43.2128470|-75.4557300
             buildConfigField 'String', 'geocodeDomainName', '"http://maps.google.com/maps/api"'
+            //http://maps.google.com/maps/api/geocode/json?address=tn
             buildConfigField   'String', 'directionsDomainName', '"http://maps.googleapis.com/maps/api/directions"'
+            //http://maps.googleapis.com/maps/api/directions/json?origin=tn&destination=ny
 
         }
     }
