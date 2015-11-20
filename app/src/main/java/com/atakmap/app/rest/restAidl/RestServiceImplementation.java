@@ -46,6 +46,30 @@ public class RestServiceImplementation extends IRestService.Stub {
 
     }
 
+    @Override
+    public void googleRoute(String origin, String destination, IRestCallback callback) throws RemoteException {
+        this.callback = callback;
+        if (!origin.equalsIgnoreCase("")&&!destination.equalsIgnoreCase("")){
+            validateAndPerformGoogleRoute(origin, destination);
+        }
+    }
+
+    @Override
+    public void mapquestRoute(String origin, String destination, IRestCallback callback) throws RemoteException {
+        this.callback = callback;
+        if (!origin.equalsIgnoreCase("")&&!destination.equalsIgnoreCase("")){
+            validateAndPerformMapquestRoute(origin, destination);
+        }
+    }
+
+    @Override
+    public void osmRoute(String origin, String destination, IRestCallback callback) throws RemoteException {
+        this.callback = callback;
+        if (!origin.equalsIgnoreCase("")&&!destination.equalsIgnoreCase("")){
+            validateAndPerformOsmRoute(origin, destination);
+        }
+    }
+
 
     void validateAndPerformGeocode(String URL, String queryParams, String geocode) {
         String result = "No results";
@@ -119,7 +143,176 @@ public class RestServiceImplementation extends IRestService.Stub {
         return geocodeResponse;
 
     }
+    void validateAndPerformOsmRoute(String routeStart, String routeEnd) {
+        String URL ="http://router.project-osrm.org/viaroute?";
+        String query =;
+        String dest = routeEnd;
+        String orgin = routeStart;
 
+
+        final GsonGetRequest<RouteObject> gsonGetRequest =
+                RouteRequests.getOsmRoute
+                        (
+                                new Response.Listener<RouteObject>() {
+                                    @Override
+                                    public void onResponse(RouteObject routeObject) {
+                                        // Deal with the RouteObject here
+
+                                        String results =  setRouteData(routeObject);
+                                        try {
+                                            callback.returnResults(results);
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                        try {
+                                            callback.restResponse(new RestResponse(routeObject.getTitle(),
+                                                    stepNumber, stepDirections, startPoint, endPoint, distance, duration));
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+                                    }
+                                }
+                                ,
+                                new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        try {
+                                            callback.returnResults("Network or transmission error has occurred.");
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                        try {
+                                            callback.restResponse(new RestResponse("Network or transmission error has occurred.",
+                                                    "Empty"));
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                },
+                                orgin,
+                                dest,
+                                URL,
+                                query
+                        );
+
+
+        App.addRequest(gsonGetRequest, TAG);
+
+    } void validateAndPerformMapquestRoute(String routeStart, String routeEnd) {
+        String URL ="http://www.mapquestapi.com/directions/v2/";
+        String query ="route?key=YOUR_KEY_HERE&";
+        String dest = "from="+routeEnd;
+        String orgin = "&to="+routeStart+"&callback=renderNarrative";
+
+
+        final GsonGetRequest<RouteObject> gsonGetRequest =
+                RouteRequests.getMapQuestRoute
+                        (
+                                new Response.Listener<RouteObject>() {
+                                    @Override
+                                    public void onResponse(RouteObject routeObject) {
+                                        // Deal with the RouteObject here
+
+                                        String results =  setRouteData(routeObject);
+                                        try {
+                                            callback.returnResults(results);
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                        try {
+                                            callback.restResponse(new RestResponse(routeObject.getTitle(),
+                                                    stepNumber, stepDirections, startPoint, endPoint, distance, duration));
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+                                    }
+                                }
+                                ,
+                                new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        try {
+                                            callback.returnResults("Network or transmission error has occurred.");
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                        try {
+                                            callback.restResponse(new RestResponse("Network or transmission error has occurred.",
+                                                    "Empty"));
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                },
+                                orgin,
+                                dest,
+                                URL,
+                                query
+                        );
+
+
+        App.addRequest(gsonGetRequest, TAG);
+
+    }
+    void validateAndPerformGoogleRoute( String routeStart, String routeEnd) {
+        String URL ="http://www.mapquestapi.com/directions/v2/";
+        String query ="route?key=YOUR_KEY_HERE&";
+        String dest = "from="+routeEnd;
+        String orgin = "&to="+routeStart+"&callback=renderNarrative";
+
+
+        final GsonGetRequest<RouteObject> gsonGetRequest =
+                RouteRequests.getRouteObject
+                        (
+                                new Response.Listener<RouteObject>() {
+                                    @Override
+                                    public void onResponse(RouteObject routeObject) {
+                                        // Deal with the RouteObject here
+
+                                        String results =  setRouteData(routeObject);
+                                        try {
+                                            callback.returnResults(results);
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                        try {
+                                            callback.restResponse(new RestResponse(routeObject.getTitle(),
+                                                    stepNumber, stepDirections, startPoint, endPoint, distance, duration));
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+                                    }
+                                }
+                                ,
+                                new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        try {
+                                            callback.returnResults("Network or transmission error has occurred.");
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                        try {
+                                            callback.restResponse(new RestResponse("Network or transmission error has occurred.",
+                                                    "Empty"));
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                },
+                                orgin,
+                                dest,
+                                URL,
+                                query
+                        );
+
+
+        App.addRequest(gsonGetRequest, TAG);
+
+    }
     void validateAndPerformRoute(String URL, String query, String routeStart, String routeEnd) {
 
         String dest = routeEnd;

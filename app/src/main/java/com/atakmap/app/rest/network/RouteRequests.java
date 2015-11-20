@@ -2,15 +2,13 @@ package com.atakmap.app.rest.network;
 
 import android.support.annotation.NonNull;
 import com.android.volley.Response;
+import com.atakmap.app.rest.dataModel.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.atakmap.app.rest.BuildConfig;
-import com.atakmap.app.rest.dataModel.RouteObject;
-import com.atakmap.app.rest.dataModel.RouteObjectDeserializer;
-import com.atakmap.app.rest.dataModel.WikipediaObject;
 
 import java.util.ArrayList;
 
@@ -19,9 +17,8 @@ import java.util.ArrayList;
  */
 public class RouteRequests
 {
-    private static final Gson gson = new GsonBuilder()
-            .registerTypeAdapter(RouteObject.class, new RouteObjectDeserializer())
-            .create();
+    private static Gson gson;
+
     /**
      * Returns a dummy object
      *
@@ -40,6 +37,8 @@ public class RouteRequests
             String queryParams
     )
     {
+        gson = new GsonBuilder().registerTypeAdapter(RouteObject.class, new RouteObjectDeserializer())
+                .create();
         final String url =urlForRequest+queryParams+origin+destination;
         // final String url = BuildConfig.directionsDomainName + "/json?origin="+origin+"&destination="+destination;
 
@@ -52,6 +51,54 @@ public class RouteRequests
                         errorListener
                 );
     }
+    public static GsonGetRequest<RouteObject> getMapQuestRoute
+            (
+                    @NonNull final Response.Listener<RouteObject> listener,
+                    @NonNull final Response.ErrorListener errorListener,
+                    String origin,
+                    String destination,
+                    String urlForRequest,
+                    String queryParams
+            )
+    {
+        gson = new GsonBuilder().registerTypeAdapter(RouteObject.class, new MapQuestRouteDeserializer())
+                .create();
+        final String url =urlForRequest+queryParams+origin+destination;
+        // final String url = BuildConfig.directionsDomainName + "/json?origin="+origin+"&destination="+destination;
+
+        return new GsonGetRequest<>
+                (
+                        url,
+                        new TypeToken<RouteObject>() {}.getType(),
+                        gson,
+                        listener,
+                        errorListener
+                );
+    }
+    public static GsonGetRequest<RouteObject> getOsmRoute
+        (
+                @NonNull final Response.Listener<RouteObject> listener,
+                @NonNull final Response.ErrorListener errorListener,
+                String origin,
+                String destination,
+                String urlForRequest,
+                String queryParams
+        )
+{
+    gson = new GsonBuilder().registerTypeAdapter(RouteObject.class, new OsmRouteDeserializer())
+            .create();
+    final String url =urlForRequest+queryParams+origin+destination;
+    // final String url = BuildConfig.directionsDomainName + "/json?origin="+origin+"&destination="+destination;
+
+    return new GsonGetRequest<>
+            (
+                    url,
+                    new TypeToken<RouteObject>() {}.getType(),
+                    gson,
+                    listener,
+                    errorListener
+            );
+}
 
     /**
      * Returns a dummy object's array

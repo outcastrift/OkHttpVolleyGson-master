@@ -40,15 +40,14 @@ public class  MainActivity extends AppCompatActivity {
         public void onServiceConnected(ComponentName name, IBinder boundService) {
             service = IRestService.Stub.asInterface(boundService);
             Log.d(MainActivity.TAG, "onServiceConnected() connected");
-            Toast.makeText(MainActivity.this, "Service connected", Toast.LENGTH_LONG)
-                    .show();
+           Toast.makeText(MainActivity.this, "Service connected", Toast.LENGTH_LONG).show();
         }
 
         public void onServiceDisconnected(ComponentName name) {
             service = null;
             Log.d(MainActivity.TAG, "onServiceDisconnected() disconnected");
-            Toast.makeText(MainActivity.this, "Service connected", Toast.LENGTH_LONG)
-                    .show();
+           Toast.makeText(MainActivity.this, "Service disconnected", Toast.LENGTH_LONG)
+                   .show();
         }
     }
 
@@ -195,6 +194,7 @@ public class  MainActivity extends AppCompatActivity {
                 setURL(wikiURL);
             }
         });
+
     }
 
 
