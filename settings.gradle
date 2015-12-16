@@ -1,1 +1,2 @@
-include ':app', ':AtakRestPlugin'
+include ':app', ':RestService'
+include ':AtakRestPlugin'

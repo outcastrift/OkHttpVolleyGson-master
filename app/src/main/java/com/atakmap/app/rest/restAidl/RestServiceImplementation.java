@@ -145,7 +145,7 @@ public class RestServiceImplementation extends IRestService.Stub {
     }
     void validateAndPerformOsmRoute(String routeStart, String routeEnd) {
         String URL ="http://router.project-osrm.org/viaroute?";
-        String query =;
+        String query ="";
         String dest = routeEnd;
         String orgin = routeStart;
 

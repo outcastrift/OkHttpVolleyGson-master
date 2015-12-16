@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+          package="com.atakmap.rest.service">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+            android:name="com.atakmap.rest.service"
+            android:allowBackup="true"
+            android:fullBackupContent="false"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme" >
+
+        <activity
+                android:name="com.atakmap.rest.activities.MainActivity"
+                android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+                android:name="com.atakmap.rest.activities.WikiObjectActivity"
+                android:label="@string/activity_title_JSON_object"
+                android:parentActivityName="com.atakmap.rest.activities.MainActivity"/>
+
+        <activity
+                android:name="com.atakmap.rest.activities.GeocodeObjectActivity"
+                android:label="@string/activity_title_JSON_array"
+                android:parentActivityName="com.atakmap.rest.activities.MainActivity"/>
+
+        <activity
+                android:name="com.atakmap.rest.activities.NetworkImageViewActivity"
+                android:label="@string/activity_title_network_image_view"
+                android:parentActivityName="com.atakmap.rest.activities.MainActivity"/>
+
+        <activity
+                android:name="com.atakmap.rest.activities.ImageRequestActivity"
+                android:label="@string/activity_title_image_request"
+                android:parentActivityName="com.atakmap.rest.activities.MainActivity"/>
+        <activity
+                android:name="com.atakmap.rest.activities.RouteObjectActivity"
+                android:label="@string/activity_title_image_request"
+                android:parentActivityName="com.atakmap.rest.activities.MainActivity"/>
+        <service
+                android:name="com.atakmap.rest.restAidl.RestService"
+                android:exported="true"
+                android:label="@string/app_name"
+                tools:ignore="ExportedService" />
+        <!--<service
+                android:name="com.atakmap.rest.restAidl.RestServiceCallBack"
+                android:exported="true"
+                android:label="@string/app_name"
+                tools:ignore="ExportedService" />-->
+
+    </application>
+
+</manifest>
