@@ -3,9 +3,6 @@ package com.atakmap.app.rest.restAidl;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * @author Aidan Follestad (afollestad)
- */
 public class RestResponse implements Parcelable {
 
     private String mValue;
@@ -13,6 +10,7 @@ public class RestResponse implements Parcelable {
     public RestResponse(Parcel source) {
         mValue = source.readString();
     }
+
 
     public RestResponse(String value) {
         mValue = value;

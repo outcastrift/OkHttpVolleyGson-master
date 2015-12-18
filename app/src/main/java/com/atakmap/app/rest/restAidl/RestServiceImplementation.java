@@ -21,8 +21,8 @@ import java.util.List;
 /**
  * Created by Sam on 15-Nov-15.
  */
-public class RestServiceImplementation extends IRestService.Stub {
-    private String routeResponse = new String();
+public class RestServiceImplementation {
+  /*  private String routeResponse = new String();
     private String wikiResponse;
     private String response;
     private static final String TAG = "RestServiceImplementation";
@@ -375,11 +375,11 @@ public class RestServiceImplementation extends IRestService.Stub {
     public List<String> endPoint=new ArrayList<String>();
     public List<String> distance=new ArrayList<String>();
     public List<String> duration=new ArrayList<String>();
-    /**
+    *//**
      * Sets the data in the UI
      *
      * @param routeObject is the object to get the data from
-     */
+     *//*
     private String setRouteData(@NonNull final RouteObject routeObject) {
         StringBuilder directionList = new StringBuilder();
 
@@ -409,11 +409,11 @@ public class RestServiceImplementation extends IRestService.Stub {
         return routeResponse;
     }
 
-    /**
+    *//**
      * Sets the turns into a Hashmap we can manipulate
      *
      * @param routeObject is the object to get the data from
-     */
+     *//*
     private HashMap<Integer, Step> constructRouteFromJson(JsonArray routeObject) {
         HashMap<Integer, Step> map = new HashMap<Integer, Step>();
         int counter = 0;
@@ -522,6 +522,6 @@ public class RestServiceImplementation extends IRestService.Stub {
         wikiResponse = wikipediaObject.getTitle() + wikipediaObject.getBody();
         return wikiResponse;
 
-    }
+    }*/
 
 }

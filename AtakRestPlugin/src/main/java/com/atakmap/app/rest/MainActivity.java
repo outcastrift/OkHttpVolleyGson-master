@@ -198,6 +198,9 @@ public class  MainActivity extends AppCompatActivity {
     }
 
 
+
+
+
     void performQuery(String url, String params, String geo, String rB, String rE, String wS){
         try {
             service.restRequest(url, params, geo,rB,rE,wS, new IRestCallback.Stub(){

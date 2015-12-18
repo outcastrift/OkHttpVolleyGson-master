@@ -6,6 +6,7 @@ interface IRestService {
       void googleRoute(in String origin, in String destination,in IRestCallback callback);
       void mapquestRoute(in String origin, in String destination,in IRestCallback callback);
       void osmRoute(in String origin, in String destination,in IRestCallback callback);
+      void getRestReponse(in String url, in String queryParams,in String queryParams2, in String searchString1, in String searchString2,in String jsonKey, in IRestCallback callback);
 
 
 }

@@ -45,7 +45,13 @@ public class RestResponse implements Parcelable {
     public List<String> endPoint;
     public List<String> distance;
     public List<String> duration;
+    public List<String> keys;
+    public List<String> valueForKey;
 
+    public RestResponse(List<String> keys,List<String> valueForKey){
+        this.keys=keys;
+        this.valueForKey = valueForKey;
+    }
 
     public RestResponse(String title, List<String> stepNumber,List<String> stepDirections,List<String> startPoint,List<String> endPoint,List<String> distance,List<String> duration) {
         this.mTitle = title;
@@ -121,6 +127,8 @@ public class RestResponse implements Parcelable {
         dest.writeStringList(this.endPoint);
         dest.writeStringList(this.distance);
         dest.writeStringList(this.duration);
+        dest.writeStringList(this.keys);
+        dest.writeStringList(this.valueForKey);
     }
 
     protected RestResponse(Parcel in) {
@@ -132,6 +140,8 @@ public class RestResponse implements Parcelable {
         this.endPoint = in.createStringArrayList();
         this.distance = in.createStringArrayList();
         this.duration = in.createStringArrayList();
+        this.keys = in.createStringArrayList();
+        this.valueForKey = in.createStringArrayList();
     }
 
     public static final Parcelable.Creator<RestResponse> CREATOR = new Parcelable.Creator<RestResponse>() {
@@ -153,6 +163,8 @@ public class RestResponse implements Parcelable {
         this.endPoint = in.createStringArrayList();
         this.distance = in.createStringArrayList();
         this.duration = in.createStringArrayList();
+        this.keys = in.createStringArrayList();
+        this.valueForKey = in.createStringArrayList();
     }
 }
 
